@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ballot</title>
+    <link rel="stylesheet" href="ballot.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a Ballot</h1>
+        <form id="ballotForm">
+            <label for="numOptions">Number of Options:</label>
+            <input type="number" id="numOptions" name="numOptions" min="1" required>
+
+            <label for="duration">Duration (in days):</label>
+            <input type="number" id="duration" name="duration" min="1" required>
+
+            <label for="privacy">Privacy Level:</label>
+            <select id="privacy" name="privacy" required>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+
+            <button type="submit">Create Ballot</button>
+        </form>
+        <button onclick="goBack()">Return to Dashboard</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'welcome.html';
+        }
+
+        document.getElementById('ballotForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const numOptions = document.getElementById('numOptions').value;
+            const duration = document.getElementById('duration').value;
+            const privacy = document.getElementById('privacy').value;
+            alert(`Ballot created with ${numOptions} options, valid for ${duration} days.\nPrivacy: ${privacy}`);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Candidate</title>
+    <link rel="stylesheet" href="candidate.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Register a Candidate</h1>
+        <form id="candidateForm">
+            <label for="name">Candidate Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" required>
+
+            <label for="partyStatus">Party Status:</label>
+            <select id="partyStatus" name="partyStatus" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Independent">Independent</option>
+                <option value="Affiliated">Affiliated</option>
+            </select>
+
+            <label for="slogan">Slogan:</label>
+            <textarea id="slogan" name="slogan" rows="2" required></textarea>
+
+            <button type="submit">Register Candidate</button>
+        </form>
+        <button onclick="goBack()">Return to Dashboard</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'welcome.html';
+        }
+
+        document.getElementById('candidateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const partyStatus = document.getElementById('partyStatus').value;
+            if (name && partyStatus) {
+                alert(`Candidate ${name} with party status "${partyStatus}" has been registered successfully.`);
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme;
+        });
+    </script>
+</body>
+</html>

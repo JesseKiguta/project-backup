@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <link rel="stylesheet" href="vote.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Vote for Your Preferred Option</h1>
+        <form id="voteForm">
+            <label for="options">Choose an option:</label>
+            <select id="options" name="options" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Option 1">Option 1</option>
+                <option value="Option 2">Option 2</option>
+                <option value="Option 3">Option 3</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="goBack()">Return to Dashboard</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'welcome.html';
+        }
+
+        document.getElementById('voteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedOption = document.getElementById('options').value;
+            if (selectedOption === "") {
+                alert('Kindly select an option before submitting.');
+            } else {
+                alert('Your option has been submitted successfully. Thank you for voting!');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme;
+        });
+    </script>
+</body>
+</html>

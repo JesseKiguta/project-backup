@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+        <div class="change-password">
+            <h2>Change Password</h2>
+            <form id="changePasswordForm">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" name="currentPassword" required>
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <label for="confirmPassword">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button type="submit">Change Password</button>
+            </form>
+        </div>
+        <div class="preferences">
+            <h2>Preferences</h2>
+            <form id="preferencesForm">
+                <label for="theme">Theme:</label>
+                <select id="theme" name="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+                <label for="notifications">Notifications:</label>
+                <input type="checkbox" id="notifications" name="notifications" checked> Enable Notifications
+                <button type="submit">Save Preferences</button>
+            </form>
+        </div>
+        <button onclick="goBack()">Back to Dashboard</button>
+    </div>
+    <script>
+        function goBack() {
+            window.location.href = 'welcome.html';
+        }
+
+        document.getElementById('changePasswordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Password changed successfully!');
+        });
+
+        document.getElementById('preferencesForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const theme = document.getElementById('theme').value;
+            document.body.className = theme;
+            localStorage.setItem('theme', theme);
+            applyThemeToOtherPages(theme);
+            alert('Preferences saved!');
+        });
+
+        function applyThemeToOtherPages(theme) {
+            localStorage.setItem('theme', theme);
+            document.body.className = theme;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.className = savedTheme;
+            document.getElementById('theme').value = savedTheme;
+        });
+    </script>
+</body>
+</html>
